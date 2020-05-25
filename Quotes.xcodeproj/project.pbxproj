@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		332D97B9247B30860028CF21 /* Persister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D97B8247B30860028CF21 /* Persister.swift */; };
 		B66F776B244F186A00E0727E /* QuotesTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66F776A244F186A00E0727E /* QuotesTabBarController.swift */; };
 		B66F776D244F190E00E0727E /* FavoriteQuoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66F776C244F190E00E0727E /* FavoriteQuoteTableViewController.swift */; };
 		B67F351A244B881F0065903B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F3519244B881F0065903B /* AppDelegate.swift */; };
@@ -14,13 +15,14 @@
 		B67F351E244B881F0065903B /* QuoteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F351D244B881F0065903B /* QuoteCollectionViewController.swift */; };
 		B67F3523244B88210065903B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B67F3522244B88210065903B /* Assets.xcassets */; };
 		B67F3526244B88210065903B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B67F3524244B88210065903B /* LaunchScreen.storyboard */; };
-		B67F352E244B88600065903B /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F352D244B88600065903B /* Quotes.swift */; };
+		B67F352E244B88600065903B /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F352D244B88600065903B /* Quote.swift */; };
 		B67F3530244B89AE0065903B /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F352F244B89AE0065903B /* Networking.swift */; };
 		B67F3533244BB6F80065903B /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F3532244BB6F80065903B /* QuoteCell.swift */; };
 		B6D07170245F12490047FAD9 /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0716F245F12490047FAD9 /* QuoteController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		332D97B8247B30860028CF21 /* Persister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persister.swift; sourceTree = "<group>"; };
 		B66F776A244F186A00E0727E /* QuotesTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTabBarController.swift; sourceTree = "<group>"; };
 		B66F776C244F190E00E0727E /* FavoriteQuoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteQuoteTableViewController.swift; sourceTree = "<group>"; };
 		B67F3516244B881F0065903B /* Quotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,7 +32,7 @@
 		B67F3522244B88210065903B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B67F3525244B88210065903B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B67F3527244B88210065903B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B67F352D244B88600065903B /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
+		B67F352D244B88600065903B /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		B67F352F244B89AE0065903B /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		B67F3532244BB6F80065903B /* QuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
 		B6D0716F245F12490047FAD9 /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
@@ -47,12 +49,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B65A3F43247B4404003B098A /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B66F776A244F186A00E0727E /* QuotesTabBarController.swift */,
+				B67F351D244B881F0065903B /* QuoteCollectionViewController.swift */,
+				B66F776C244F190E00E0727E /* FavoriteQuoteTableViewController.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
 		B65B3762244BE42C00ACB67B /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				B67F3532244BB6F80065903B /* QuoteCell.swift */,
-				B67F351D244B881F0065903B /* QuoteCollectionViewController.swift */,
-				B66F776C244F190E00E0727E /* FavoriteQuoteTableViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -60,7 +70,7 @@
 		B65B3763244BE43100ACB67B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B67F352D244B88600065903B /* Quotes.swift */,
+				B67F352D244B88600065903B /* Quote.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -70,6 +80,7 @@
 			children = (
 				B67F352F244B89AE0065903B /* Networking.swift */,
 				B6D0716F245F12490047FAD9 /* QuoteController.swift */,
+				332D97B8247B30860028CF21 /* Persister.swift */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -93,12 +104,11 @@
 		B67F3518244B881F0065903B /* Quotes */ = {
 			isa = PBXGroup;
 			children = (
+				B65A3F43247B4404003B098A /* View Controller */,
 				B67F3531244B97670065903B /* Supporting File */,
 				B65B3762244BE42C00ACB67B /* Views */,
 				B65B3763244BE43100ACB67B /* Model */,
 				B65B3764244BE43500ACB67B /* Model Controller */,
-				B67F3527244B88210065903B /* Info.plist */,
-				B66F776A244F186A00E0727E /* QuotesTabBarController.swift */,
 			);
 			path = Quotes;
 			sourceTree = "<group>";
@@ -110,6 +120,7 @@
 				B67F351B244B881F0065903B /* SceneDelegate.swift */,
 				B67F3522244B88210065903B /* Assets.xcassets */,
 				B67F3524244B88210065903B /* LaunchScreen.storyboard */,
+				B67F3527244B88210065903B /* Info.plist */,
 			);
 			path = "Supporting File";
 			sourceTree = "<group>";
@@ -185,7 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B67F3533244BB6F80065903B /* QuoteCell.swift in Sources */,
-				B67F352E244B88600065903B /* Quotes.swift in Sources */,
+				B67F352E244B88600065903B /* Quote.swift in Sources */,
 				B67F3530244B89AE0065903B /* Networking.swift in Sources */,
 				B66F776B244F186A00E0727E /* QuotesTabBarController.swift in Sources */,
 				B67F351E244B881F0065903B /* QuoteCollectionViewController.swift in Sources */,
@@ -193,6 +204,7 @@
 				B6D07170245F12490047FAD9 /* QuoteController.swift in Sources */,
 				B67F351C244B881F0065903B /* SceneDelegate.swift in Sources */,
 				B66F776D244F190E00E0727E /* FavoriteQuoteTableViewController.swift in Sources */,
+				332D97B9247B30860028CF21 /* Persister.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,14 +342,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4939K9623X;
-				INFOPLIST_FILE = Quotes/Info.plist;
+				INFOPLIST_FILE = "Quotes/Supporting File/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nick.Quotes;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nick.QuotesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -350,14 +362,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4939K9623X;
-				INFOPLIST_FILE = Quotes/Info.plist;
+				INFOPLIST_FILE = "Quotes/Supporting File/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nick.Quotes;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nick.QuotesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

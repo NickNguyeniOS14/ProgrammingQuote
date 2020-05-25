@@ -13,7 +13,8 @@ protocol QuoteCellDelegate: class {
     func didTapSaveButton(for cell:QuoteCell)
 }
 
-class QuoteCell: UICollectionViewCell {
+class QuoteCell: UICollectionViewCell
+{
     
     weak var delegate: QuoteCellDelegate?
     
@@ -39,7 +40,7 @@ class QuoteCell: UICollectionViewCell {
     
     
     lazy var loveButton: UIButton = {
-        let bt = UIButton(type: .system)
+        let bt = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         bt.setImage(UIImage(systemName: "heart",withConfiguration: UIImage.SymbolConfiguration(pointSize: 24)), for: .normal)
         bt.tintColor = UIColor(named: "backgroundColor")
         bt.layer.masksToBounds = true
@@ -50,14 +51,14 @@ class QuoteCell: UICollectionViewCell {
         bt.translatesAutoresizingMaskIntoConstraints = false
         return bt
     }()
-    
+   
     @objc func addToFavorites() {
         
         delegate?.didTapSaveButton(for: self)
-       
+        
     }
     lazy var shareButton: UIButton = {
-        let bt = UIButton(type: .system)
+        let bt = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         bt.setImage(UIImage(systemName: "square.and.arrow.up",withConfiguration: UIImage.SymbolConfiguration(pointSize: 24)), for: .normal)
         bt.tintColor = UIColor(named: "backgroundColor")
         bt.layer.masksToBounds = true
@@ -87,7 +88,7 @@ class QuoteCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+      
         addSubview(view)
         view.addSubview(contentTextView)
         view.addSubview(stackView)
@@ -112,33 +113,20 @@ class QuoteCell: UICollectionViewCell {
             
             
             shareButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -60),
-            shareButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -30),
+            shareButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -40),
            
-            shareButton.widthAnchor.constraint(equalToConstant: 40),
-            shareButton.heightAnchor.constraint(equalToConstant: 40),
-            loveButton.widthAnchor.constraint(equalToConstant: 40),
-            loveButton.heightAnchor.constraint(equalToConstant: 40)
+            shareButton.widthAnchor.constraint(equalToConstant: 60),
+            shareButton.heightAnchor.constraint(equalToConstant: 60),
+            loveButton.widthAnchor.constraint(equalToConstant: 60),
+            loveButton.heightAnchor.constraint(equalToConstant: 60)
 
             
         ])
     
     }
     required init?(coder: NSCoder) {
+       
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    var quote: Quotes? {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private func updateViews() {
-        guard let quote = quote else { return }
-        loveButton.backgroundColor = quote.isFavorite ? .red : .black
-        contentTextView.text = [quote.content,quote.author].joined(separator: "\n\n- ")
-       
-    }
-   
+
 }

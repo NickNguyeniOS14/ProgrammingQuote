@@ -7,61 +7,95 @@
 //
 
 import Foundation
+import UIKit
 
-class QuoteController
-{
-    static let shared = QuoteController()
-    
-    private var quoteURL: URL? {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        let fileName = "Quotes.plist"
-        return documentDirectory?.appendingPathComponent(fileName)
-    }
-    
-    
-    var favoritesQuotes: [Quotes] = []
-    
-    func addQuoteToFavoriteLists( quote:inout Quotes) {
-    
-        favoritesQuotes.append(quote)
-        saveToPersistentStore()
-        
-    }
-    func removeQuoteFromFavoriteLists( quote:inout Quotes) {
+class QuoteController {
+	static let shared = QuoteController()
 
-        guard let positionToRemove = favoritesQuotes.firstIndex(of:quote) else { return }
-        favoritesQuotes.remove(at: positionToRemove)
-        saveToPersistentStore()
-    }
+	let fileName = "Quotes.plist"
+
+	var persister: Persister? {
+		Persister(withFileName: fileName)
+	}
+
+    private(set) var quotes: [Quote] = []
     
-    func updateHasBeenFavorite(for quote: Quotes, at position : Int ) {
-        guard let index = favoritesQuotes.firstIndex(of: quote) else { return }
-        favoritesQuotes[index].isFavorite = !favoritesQuotes[index].isFavorite
+    private(set) var favoriteQuotes: [String] = []
+
+	private init() {
+		loadFromPersistence()
+	}
+
+    private func scheduleLocalNotification(body: String) {
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.body = body
+        content.categoryIdentifier = "alarm"
+        content.sound = .default
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 4000, repeats: false) // Change this one to 86400 to remind 24 hours later.
         
-        saveToPersistentStore()
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
     }
     
-     func saveToPersistentStore() {
-        let plistEncoder = PropertyListEncoder()
-        do {
-            let quotesData = try plistEncoder.encode(favoritesQuotes)
-            guard let fileURL = quoteURL else { return }
-            try quotesData.write(to: fileURL)
-        } catch let err as NSError {
-            print(err.localizedDescription)
-        }
+	func fetchQuotes(completion: @escaping () -> Void) {
+		Networking.fetchAllQuotes { (quotes, error) in
+			if let error = error {
+				NSLog("Error fetching qutoes \(error)")
+				completion()
+				return
+			}
+			guard let quotes = quotes else { return }
+			self.quotes = quotes
+            self.scheduleLocalNotification(body: quotes.randomElement()!.content)
+			completion()
+		}
+	}
+
+	func getQuote(at index: Int) -> (quote: Quote, isFavorite: Bool) {
+		let quote = quotes[index]
+		let isFavorite = favoriteQuotes.contains(quote.id)
+		return (quote, isFavorite)
+	}
+
+	func getQuote(by id: String) -> Quote? {
+        
+		for quote in quotes {
+			if quote.id == id {
+				return quote
+			}
+		}
+		return nil
+	}
+
+
+	// MARK: - Manage persistence
+	// SUGGESTION:  Save the favorites as a separate file.
+	// To do this each quote would need a permanent, unique ID.
+	// It would be the IDs that you would save to the favorites file.
+    func updateHasBeenFavorite(for quote: Quote) {
+		if let index = favoriteQuotes.firstIndex(of: quote.id) {
+			// this means the quote is currently favorited. toggle OFF
+			favoriteQuotes.remove(at: index)
+		} else {
+			// this means the quote is current not favorited. toggle ON
+			favoriteQuotes.append(quote.id)
+		}
+
+		savePersistence()
     }
-    
-     func loadFromPersistentStore() {
-        do {
-            guard let fileURL = quoteURL else { return }
-            let quotesData = try Data(contentsOf: fileURL)
-            let plistDecoder = PropertyListDecoder()
-            self.favoritesQuotes = try plistDecoder.decode([Quotes].self, from: quotesData)
-        } catch let err as NSError {
-            print(err.localizedDescription)
-        }
-    }
-    
-    
+
+	private func loadFromPersistence() {
+		guard let persister = persister else { return }
+		do {
+			favoriteQuotes = try persister.fetch()
+		} catch {
+			NSLog("Error loading from persistence!: \(error)")
+		}
+	}
+
+	private func savePersistence() {
+		persister?.save(favoriteQuotes)
+	}
+
 }

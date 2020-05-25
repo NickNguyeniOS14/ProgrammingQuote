@@ -1,0 +1,15 @@
+version: "Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)"
+options: "deacfa1887615f2cf2cb550f9ad28c3e"
+build_time: [1590364387, 798881000]
+inputs:
+  "/Users/mredig/Downloads/Quotes/Quotes/Views/QuoteCell.swift": [1590290701, 0]
+  "/Users/mredig/Downloads/Quotes/Quotes/Model/Quote.swift": [1590364205, 639067460]
+  "/Users/mredig/Downloads/Quotes/Quotes/Model Controller/Networking.swift": [1590362172, 613547335]
+  "/Users/mredig/Downloads/Quotes/Quotes/Extensions/Helpers.swift": [1590292785, 0]
+  "/Users/mredig/Downloads/Quotes/QuotesTabBarController.swift": [1590278779, 0]
+  "/Users/mredig/Downloads/Quotes/Quotes/Views/QuoteCollectionViewController.swift": [1590362719, 826170323]
+  "/Users/mredig/Downloads/Quotes/Quotes/Supporting File/AppDelegate.swift": [1587253479, 0]
+  "/Users/mredig/Downloads/Quotes/Quotes/Model Controller/QuoteController.swift": [1590364387, 719333602]
+  "/Users/mredig/Downloads/Quotes/Quotes/Supporting File/SceneDelegate.swift": [1587470823, 0]
+  "/Users/mredig/Downloads/Quotes/Quotes/Views/FavoriteQuoteTableViewController.swift": [1590364320, 786732176]
+  "/Users/mredig/Downloads/Quotes/Quotes/Model Controller/Persister.swift": [1590361257, 254829781]

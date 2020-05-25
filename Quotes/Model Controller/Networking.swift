@@ -8,30 +8,27 @@
 
 import Foundation
 
-class Networking {
+enum Networking {
     
-    var quotes: [Quotes] = []
+    static let baseURL = URL(string: "https://programming-quotes-api.herokuapp.com/quotes/lang/en#")!
     
-    let baseURL = URL(string: "https://programming-quotes-api.herokuapp.com/quotes/lang/en#")!
     
-    func fetchAllQuotes(completion: @escaping ([Quotes],Error?) -> Void) {
-        let request = URLRequest(url: baseURL)
+    static func fetchAllQuotes(completion: @escaping ([Quote]?, Error?) -> Void) {
+		let request = URLRequest(url: baseURL)
      
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else { return }
             
             if let err = error {
-                print(err.localizedDescription)
+                completion(nil, err)
                 return
             }
             let decoder = JSONDecoder()
             do {
-                let decodedQuotes = try decoder.decode([Quotes].self, from: data)
-                self.quotes = decodedQuotes
-                completion(decodedQuotes,nil)
+                let decodedQuotes = try decoder.decode([Quote].self, from: data)
+                completion(decodedQuotes, nil)
             } catch {
-                print(error)
-                return
+                completion(nil, error)
             }
         }.resume()
     }
